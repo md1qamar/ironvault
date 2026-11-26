@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="195" height="28" viewBox="0 0 195 28">
+  <rect width="70" height="28" fill="#1e293b" rx="5"/>
+  <rect x="70" width="125" height="28" fill="#dc2626" rx="5"/>
+  <rect x="65" width="10" height="28" fill="#dc2626"/>
+  <text x="35" y="18" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">NETWORK</text>
+  <text x="132" y="18" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">100% AIR-GAPPED</text>
+</svg>

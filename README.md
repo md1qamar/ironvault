@@ -5,11 +5,13 @@
 # 🛡️ IronVault
 ### Military-Grade, Zero-Knowledge Offline Desktop Password Manager
 
-[![Python 3.10+](https://img.shields.io/static/v1?label=Python&message=3.10+-+3.12&color=3776AB&style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Cipher AES-256-GCM](https://img.shields.io/static/v1?label=Cipher&message=AES-256-GCM&color=10B981&style=for-the-badge&logo=shield)](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
-[![KDF Argon2id](https://img.shields.io/static/v1?label=KDF&message=Argon2id&color=7C3AED&style=for-the-badge)](https://en.wikipedia.org/wiki/Argon2)
-[![Network 100% Air-Gapped](https://img.shields.io/static/v1?label=Network&message=100%25+Air-Gapped&color=EF4444&style=for-the-badge)](README.md)
-[![License MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=2563EB&style=for-the-badge)](LICENSE)
+<p align="center">
+  <img src="assets/badges/python.svg" alt="Python 3.10 - 3.12" height="28" />
+  <img src="assets/badges/cipher.svg" alt="Cipher AES-256-GCM" height="28" />
+  <img src="assets/badges/kdf.svg" alt="KDF Argon2id" height="28" />
+  <img src="assets/badges/network.svg" alt="100% Air-Gapped" height="28" />
+  <img src="assets/badges/license.svg" alt="MIT License" height="28" />
+</p>
 
 <p align="center">
   <b>IronVault</b> is a zero-knowledge, 100% offline desktop password manager built with maximum security and privacy at its core. Zero cloud dependencies, zero network requests, zero telemetry, and zero attack surface.
@@ -30,9 +32,38 @@ IronVault features a sleek, dark-mode cyber aesthetic designed for speed, clarit
 
 ---
 
-## 🔒 Cryptographic Architecture & Specifications
+## 🔒 Cryptographic Architecture & Flow
 
-![Cryptographic Pipeline Diagram](assets/security_diagram.png)
+```mermaid
+graph TD
+    subgraph Input["🔑 User Credentials"]
+        MP["Master Password (Secret)"]
+        KF["Optional 256-bit Keyfile"]
+        SALT["32-Byte Cryptographic Salt"]
+    end
+
+    subgraph KDF["⚡ Key Derivation Function"]
+        ARGON["Argon2id (RFC 9106 / OWASP)<br/>• 64 MB RAM (Memory-Hard)<br/>• 4 Threads • 3 Iterations"]
+    end
+
+    subgraph Encryption["🛡️ Authenticated Cipher"]
+        KEY["256-bit Symmetric Key"]
+        AES["AES-256-GCM (AEAD)<br/>• 96-bit Random Nonce<br/>• 128-bit Authentication Tag"]
+    end
+
+    subgraph Storage["💾 Persistence & Memory"]
+        VAULT[("Encrypted .ivault File<br/>100% Offline • Zero Cloud")]
+        MEM["In-Memory Decrypted State<br/>(Purged on Lock or 5m Idle)"]
+    end
+
+    MP --> ARGON
+    KF -.-> ARGON
+    SALT --> ARGON
+    ARGON --> KEY
+    KEY --> AES
+    AES <==> VAULT
+    AES <==> MEM
+```
 
 | Security Component | Standard / Algorithm | Parameters / Implementation Details |
 |---|---|---|
@@ -41,6 +72,37 @@ IronVault features a sleek, dark-mode cyber aesthetic designed for speed, clarit
 | **Tamper Resistance** | Header AAD Binding | Magic header (`IVLT`), format version, and salt are cryptographically bound to the ciphertext via Associated Authenticated Data. Any bit modification invalidates decryption. |
 | **Dual-Factor Protection** | Master Password + Keyfile | Optional 256-bit cryptographically secure physical keyfile (e.g. on a USB drive). Both factors must be present to compute the master key. |
 | **Memory Security** | In-Memory Zero-Knowledge Model | Sensitive data exists decrypted only within volatile RAM. Locking the vault or exiting immediately purges memory. |
+
+---
+
+## 🏗️ System Architecture & Data Flow
+
+```mermaid
+flowchart LR
+    subgraph UI["🖥️ Presentation Layer"]
+        CTK["CustomTkinter Dark UI<br/>(1280x820 Cyber Aesthetic)"]
+    end
+
+    subgraph Security["⏱️ Watchdog & Security"]
+        WATCHDOG["Inactivity Auto-Lock (5m)"]
+        CLIP["Clipboard Auto-Clear (30s)"]
+    end
+
+    subgraph Vault["🗄️ Core Vault Engine"]
+        CRUD["Credential Management"]
+        TOTP["pyotp TOTP 2FA Engine"]
+        GEN["Diceware & Password Generator"]
+    end
+
+    subgraph Crypto["🔐 Cryptographic Engine"]
+        AEAD["AES-256-GCM + Argon2id"]
+    end
+
+    CTK <--> Security
+    CTK <--> Vault
+    Vault <--> Crypto
+    Crypto <--> DISK[("Local .ivault File")]
+```
 
 ---
 
@@ -91,10 +153,11 @@ python test_ironvault.py
 
 ```
 ironvault/
-├── assets/                  # High-resolution screenshots and architecture diagrams
-│   ├── hero_banner.png
-│   ├── app_mockup.png
-│   └── security_diagram.png
+├── assets/                  # High-resolution screenshots, badges, and diagrams
+│   ├── badges/              # Local SVG badges (offline-guaranteed)
+│   ├── hero_banner.png      # Branded repository banner
+│   ├── app_mockup.png       # Complete desktop application mockup
+│   └── security_diagram.png # Cryptographic pipeline diagram
 ├── crypto.py                # Argon2id KDF, AES-256-GCM AEAD, and entropy analysis
 ├── vault.py                 # In-memory vault model, TOTP engine, password generator
 ├── security_manager.py      # Clipboard auto-clear and inactivity auto-lock watchdog
