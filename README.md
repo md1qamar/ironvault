@@ -149,6 +149,15 @@ python test_ironvault.py
 
 ---
 
+## 📚 In-Depth Guides & Documentation
+
+Explore the comprehensive guides:
+- 📖 [User Guide & Keyfile Setup](docs/USER_GUIDE.md) – Step-by-step walkthrough of vault creation, TOTP setup, password generator, and physical keyfiles.
+- 🔒 [Security & Cryptography Deep-Dive](docs/SECURITY.md) – Mathematical specifications, Argon2id KDF parameters, AES-256-GCM AEAD, and threat model.
+- ❓ [FAQ & Troubleshooting](docs/FAQ.md) – Frequently asked questions, AI security analysis, and solutions to common issues.
+
+---
+
 ## 📁 Repository Structure
 
 ```
@@ -158,6 +167,10 @@ ironvault/
 │   ├── hero_banner.png      # Branded repository banner
 │   ├── app_mockup.png       # Complete desktop application mockup
 │   └── security_diagram.png # Cryptographic pipeline diagram
+├── docs/                    # In-depth guides and documentation
+│   ├── USER_GUIDE.md        # Comprehensive setup and usage guide
+│   ├── SECURITY.md          # Cryptographic architecture deep-dive
+│   └── FAQ.md               # Frequently asked questions and troubleshooting
 ├── crypto.py                # Argon2id KDF, AES-256-GCM AEAD, and entropy analysis
 ├── vault.py                 # In-memory vault model, TOTP engine, password generator
 ├── security_manager.py      # Clipboard auto-clear and inactivity auto-lock watchdog
