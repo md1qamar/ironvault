@@ -5,11 +5,11 @@
 # 🛡️ IronVault
 ### Military-Grade, Zero-Knowledge Offline Desktop Password Manager
 
-[![Python 3.12](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Encryption AES-256-GCM](https://img.shields.io/badge/Cipher-AES--256--GCM-10B981?style=for-the-badge&logo=shield)](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
-[![KDF Argon2id](https://img.shields.io/badge/KDF-Argon2id_(OWASP)-7C3AED?style=for-the-badge)](https://en.wikipedia.org/wiki/Argon2)
-[![License MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-[![Offline First](https://img.shields.io/badge/Network-100%25%20Air--Gapped-EF4444?style=for-the-badge)](README.md)
+[![Python 3.10+](https://img.shields.io/static/v1?label=Python&message=3.10+-+3.12&color=3776AB&style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Cipher AES-256-GCM](https://img.shields.io/static/v1?label=Cipher&message=AES-256-GCM&color=10B981&style=for-the-badge&logo=shield)](https://en.wikipedia.org/wiki/Galois/Counter_Mode)
+[![KDF Argon2id](https://img.shields.io/static/v1?label=KDF&message=Argon2id&color=7C3AED&style=for-the-badge)](https://en.wikipedia.org/wiki/Argon2)
+[![Network 100% Air-Gapped](https://img.shields.io/static/v1?label=Network&message=100%25+Air-Gapped&color=EF4444&style=for-the-badge)](README.md)
+[![License MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=2563EB&style=for-the-badge)](LICENSE)
 
 <p align="center">
   <b>IronVault</b> is a zero-knowledge, 100% offline desktop password manager built with maximum security and privacy at its core. Zero cloud dependencies, zero network requests, zero telemetry, and zero attack surface.
